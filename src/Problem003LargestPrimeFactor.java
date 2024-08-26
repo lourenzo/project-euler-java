@@ -1,3 +1,4 @@
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class Problem003LargestPrimeFactor {
@@ -9,9 +10,10 @@ public class Problem003LargestPrimeFactor {
   public static void main(String[] args) {
     long n = 600851475143L;
 
-    LongStream.range(1, n)
+    IntStream.range(1, (int) Math.sqrt(n))
       .filter(x -> n % x == 0)
       .filter(Problem003LargestPrimeFactor::isPrime)
+      .filter(x -> x < Math.sqrt(n))
       .forEach(
         x -> {
           System.out.printf("%d %b%n", x, isPrime(x));
