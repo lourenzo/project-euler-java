@@ -36,8 +36,8 @@ public class Problem004PalindromicNumber {
   }
 
   public static void main(String[] args) {
-    List<Integer> nums = progressiveIterationResults();
-    System.out.println("Normal: " + nums);
+    //List<Integer> nums = progressiveIterationResults();
+    //System.out.println("Normal: " + nums);
     Optional<Integer> num = progressiveOptimized();
     System.out.println("Optimized: " + num);
   }

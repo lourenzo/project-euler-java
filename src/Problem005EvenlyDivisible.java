@@ -4,7 +4,7 @@ import static java.util.stream.IntStream.rangeClosed;
 public class Problem005EvenlyDivisible {
 
   public static void main(String[] args) {
-    Integer n = iterate(2520, i -> i + 1)
+    Integer n = iterate(2520, i -> i + 20)
       .filter(x -> rangeClosed(1, 20).allMatch(y -> x % y == 0))
       .findFirst().orElseThrow();
 
