@@ -12,7 +12,8 @@ public class Problem002EvenFibonacci {
   public static void main(String[] args) {
     OptionalInt result = IntStream.range(0, 42)
       .map(Problem002EvenFibonacci::fibonacci)
-      .filter(x -> x < 4000000 && x % 2 == 0)
+      .filter(x -> x % 2 == 0)
+      .takeWhile(x -> x < 4000000)
       .reduce(Integer::sum);
 
     System.out.println("Result: " + result);
