@@ -5,7 +5,7 @@ public class PrimeToolKit {
 
   // From exercise 003
   public static boolean isPrime(long number) {
-    return number > 1 && range(2, number).noneMatch(i -> number % i == 0);
+    return number > 1 && range(2, Math.round(Math.sqrt(number))).noneMatch(i -> number % i == 0);
   }
 
   // From exercise 007

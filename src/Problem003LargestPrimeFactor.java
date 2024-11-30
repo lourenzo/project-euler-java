@@ -5,7 +5,7 @@ import static java.util.stream.LongStream.range;
 public class Problem003LargestPrimeFactor {
 
   private static boolean isPrime(long number) {
-    return number > 1 && range(2, number).noneMatch(i -> number % i == 0);
+    return number > 1 && range(2, Math.round(Math.sqrt(number))).noneMatch(i -> number % i == 0);
   }
 
   public static void main(String[] args) {
