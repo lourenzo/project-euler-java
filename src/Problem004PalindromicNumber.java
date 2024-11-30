@@ -1,47 +1,27 @@
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
+
+import static java.util.stream.IntStream.iterate;
 
 public class Problem004PalindromicNumber {
 
   public static boolean isPalindrome(int number) {
-    String stringNum = String.valueOf(number);
-    String reverseStringNum = new StringBuilder(stringNum).reverse().toString();
-
-    return stringNum.equals(reverseStringNum);
+    return String
+      .valueOf(number)
+      .equals(new StringBuilder(String.valueOf(number)).reverse().toString());
   }
 
-  public static List<Integer> progressiveIterationResults() {
-    return IntStream.range(100, 1000)
-      .mapToObj(x -> IntStream.range(100, 1000)
-        .map(y -> x * y)
-        .distinct()
-        .filter(Problem004PalindromicNumber::isPalindrome)
-        .boxed())
-      .flatMap(stream -> stream)
-      .sorted()
-      .distinct()
-      .toList();
-  }
-
-  public static Optional<Integer> progressiveOptimized() {
-    return IntStream.range(900, 999)
-      .mapToObj(x -> IntStream.range(900, 999)
+  public static void main(String[] args) {
+    Optional<Integer> num = iterate(999, x -> x > 900, x -> x - 1)
+      .mapToObj(x -> iterate(999, y -> y > 900, y -> y - 1)
         .map(y -> x * y)
         .distinct()
         .filter(Problem004PalindromicNumber::isPalindrome)
         .boxed())
       .flatMap(stream -> stream)
       .max(Integer::compareTo);
-  }
 
-  public static void main(String[] args) {
-    //List<Integer> nums = progressiveIterationResults();
-    //System.out.println("Normal: " + nums);
-    Optional<Integer> num = progressiveOptimized();
-    System.out.println("Optimized: " + num);
+    System.out.println(num);
   }
 
   // Improvements: make the range descending, from 999 to 900 is enough
-
 }
