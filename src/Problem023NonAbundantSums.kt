@@ -1,19 +1,8 @@
 import kotlin.math.sqrt
 
-private val divisorCache = mutableMapOf<Long, List<Long>>()
-private val divisorSumCache = mutableMapOf<Long, Long>()
 private val isAbundantCache = mutableMapOf<Long, Boolean>()
 
-fun listDivisors(n: Long): List<Long> {
-  if (n <= 1) {
-    if (!divisorCache.containsKey(n)) {
-      divisorCache[n] = emptyList()
-      divisorSumCache[n] = 0L
-    }
-    return divisorCache.getValue(n)
-  }
-
-  if (!divisorCache.containsKey(n)) {
+fun buildCacheFor(n: Long) {
     val divisors = mutableSetOf(1L)
     val limit = sqrt(n.toDouble()).toLong()
 
@@ -27,30 +16,14 @@ fun listDivisors(n: Long): List<Long> {
       }
     }
 
-    val sortedDivisors = divisors.toList().sorted()
-    val sum = divisors.sum()
-
-    divisorCache[n] = sortedDivisors
-    divisorSumCache[n] = sum
-    divisorSumCache[n]?.let { isAbundantCache[n] = it > n }
-  }
-
-  return divisorCache.getValue(n)
-}
-
-fun isPerfect(n: Long): Boolean {
-  return divisorSumCache[n] == n
-}
-
-fun isAbundant(n: Long): Boolean {
-  return isAbundantCache[n] == true
+    isAbundantCache[n] = divisors.sum() > n
 }
 
 fun sumCombinativePairs(numbers: List<Long>, limit: Long): List<Long> {
   return numbers.asSequence()
     .flatMap { i ->
       numbers.asSequence()
-        .filter { j -> i + j < limit}
+        .filter { j -> i + j <= limit}
         .map { j -> i + j }
     }
     .distinct()
@@ -60,29 +33,24 @@ fun sumCombinativePairs(numbers: List<Long>, limit: Long): List<Long> {
 
 fun main() {
   val limit = 28123L
-  for (i in 1L .. limit) {
-    val divisors = listDivisors(i)
-    //println("$i: isPerfect(${isPerfect(i)}) Divisors: $divisors")
+
+  for (n in 1L .. limit) {
+    buildCacheFor(n)
   }
-  val abundantNumbersCache = isAbundantCache
+
+  val abundantNumber = isAbundantCache
     .toList()
-    .filter { it -> it.second }.map { it.first }
+    .filter { it -> it.second }
+    .map { it.first }
 
-  //println("abundant numbers: ${abundantNumbersCache.toString()}")
-
-  val sumsOfTwoAbundantNumbers = sumCombinativePairs(abundantNumbersCache, limit)
-
-  val notSumOfTwoAbundantNumbers = mutableListOf(0L)
-
+  val sumsOfTwoAbundantNumbers = sumCombinativePairs(abundantNumber, limit)
   var sumOfAllNonSumOfAbundant = 0L
 
-  for (i in 1L .. limit) {
-    if (!sumsOfTwoAbundantNumbers.contains(i)) {
-      notSumOfTwoAbundantNumbers.add(i)
-      sumOfAllNonSumOfAbundant += i
+  for (n in 1L .. limit) {
+    if (!sumsOfTwoAbundantNumbers.contains(n)) {
+      sumOfAllNonSumOfAbundant += n
     }
   }
 
   println("$sumOfAllNonSumOfAbundant")
-
 }
