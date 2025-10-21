@@ -19,17 +19,6 @@ fun buildCacheFor(n: Long) {
     isAbundantCache[n] = divisors.sum() > n
 }
 
-fun sumCombinativePairs(numbers: List<Long>, limit: Long): List<Long> {
-  return numbers.asSequence()
-    .flatMap { i ->
-      numbers.asSequence()
-        .filter { j -> i + j <= limit}
-        .map { j -> i + j }
-    }
-    .distinct()
-    .sorted()
-    .toList()
-}
 
 fun main() {
   val limit = 28123L
@@ -40,10 +29,19 @@ fun main() {
 
   val abundantNumber = isAbundantCache
     .toList()
-    .filter { it -> it.second }
+    .filter { it.second }
     .map { it.first }
 
-  val sumsOfTwoAbundantNumbers = sumCombinativePairs(abundantNumber, limit)
+  val sumsOfTwoAbundantNumbers = abundantNumber.asSequence()
+    .flatMap { i ->
+      abundantNumber.asSequence()
+        .filter { j -> j >= i && i + j <= limit}
+        .map { j -> i + j }
+    }
+    .distinct()
+    .sorted()
+    .toList()
+
   var sumOfAllNonSumOfAbundant = 0L
 
   for (n in 1L .. limit) {
