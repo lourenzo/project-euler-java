@@ -11,5 +11,5 @@ optimized solutions.
 
 ## To-Do
 
-- [ ] Build a stream-efficient Prime number detection library
+- [x] Build a stream-efficient Prime number detection library
 - [ ] Add a time efficiency calculating library
