@@ -1,7 +1,7 @@
 # Project Euler - Java Streams
 
 My implementations of solutions for the problems in Project Euler, as I am
-coding it along with my teammates at CAA.
+coding it along.
 
 ## Development process
 
