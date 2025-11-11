@@ -1,8 +1,5 @@
-public class Problem007NthPrime {
+void main() {
+  int nThPrime = PrimeToolKit.nthPrime(10001);
 
-  public static void main(String[] args) {
-    int nThPrime = PrimeToolKit.nthPrime(10001);
-
-    System.out.println(nThPrime);
-  }
+  IO.println(nThPrime);
 }
