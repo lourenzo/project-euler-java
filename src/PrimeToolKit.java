@@ -11,7 +11,7 @@ public class PrimeToolKit {
   // From exercise 007
   static int nthPrime(int n) {
     return iterate(1, x -> x + 1)
-        .filter(PrimeToolKit::isPrime)
-        .limit(n).toArray()[n - 1];
+      .filter(PrimeToolKit::isPrime)
+      .limit(n).toArray()[n - 1];
   }
 }

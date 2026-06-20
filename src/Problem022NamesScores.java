@@ -1,3 +1,4 @@
+import static java.util.Arrays.sort;
 void main() throws IOException {
   // file downloaded from: https://projecteuler.net/resources/documents/0022_names.txt
   String content = Files.readString(Paths.get("src/0022_names.txt"));
@@ -7,7 +8,7 @@ void main() throws IOException {
   }
 
   String[] names = content.split("\",\"");
-  Arrays.sort(names);
+  sort(names);
 
   long total = 0L;
 

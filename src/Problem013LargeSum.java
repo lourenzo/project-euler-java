@@ -1,3 +1,4 @@
+import static java.util.Arrays.stream;
 static final String[] NUMS = {
   "37107287533902102798797998220837590246510135740250",
   "46376937677490009712648124896970078050417018260538",
@@ -102,7 +103,7 @@ static final String[] NUMS = {
 };
 
 static String firstTenDigits() {
-  var sum = Arrays.stream(NUMS).map(BigInteger::new).reduce(BigInteger.ZERO, BigInteger::add);
+  var sum = stream(NUMS).map(BigInteger::new).reduce(BigInteger.ZERO, BigInteger::add);
   return sum.toString().substring(0, 10);
 }
 

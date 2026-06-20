@@ -66,5 +66,5 @@ void main() {
     }
   }
 
-  System.out.println(sumOfAllNonSumOfAbundant);
+  IO.println(sumOfAllNonSumOfAbundant);
 }

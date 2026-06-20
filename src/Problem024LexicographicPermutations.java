@@ -31,15 +31,15 @@ void main(String[] args) {
   List<String> permutations = generatePermutations(digits);
   permutations.sort(String::compareTo);
 
-  System.out.println("Total permutations: " + permutations.size());
+  IO.println("Total permutations: " + permutations.size());
 
-  System.out.println("1,000,000 th permutation: " + permutations.get(999_999));
+  IO.println("1,000,000 th permutation: " + permutations.get(999_999));
 
 //  for (int i = 0; i < min(1_000_000, permutations.size()); i++) {
-//    System.out.println("  " + (i + 1) + ": " + permutations.get(i));
+//    IO.println("  " + (i + 1) + ": " + permutations.get(i));
 //  }
 
-  System.out.println("\n--- Note for Project Euler Problem 24 ---");
-  System.out.println("This recursive method is too slow for 10 digits (0-9).");
-  System.out.println("The optimal PE24 solution uses the Factorial Number System to find the Nth permutation directly.");
+  IO.println("\n--- Note for Project Euler Problem 24 ---");
+  IO.println("This recursive method is too slow for 10 digits (0-9).");
+  IO.println("The optimal PE24 solution uses the Factorial Number System to find the Nth permutation directly.");
 }

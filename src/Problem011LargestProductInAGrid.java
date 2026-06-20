@@ -1,3 +1,5 @@
+import static java.util.stream.IntStream.range;
+
 static final int[][] GRID = {
   {8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8},
   {49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0},
@@ -24,11 +26,9 @@ static final int[][] GRID = {
 static long largestProduct() {
   int rows = GRID.length, cols = GRID[0].length;
 
-  return IntStream
-    .range(0, rows)
+  return range(0, rows)
     .boxed()
-    .flatMap(row -> IntStream
-      .range(0, cols)
+    .flatMap(row -> range(0, cols)
       .mapToObj(col -> {
         long best = 0;
         if (col + 4 <= cols) {

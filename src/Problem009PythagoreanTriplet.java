@@ -9,7 +9,5 @@ void main() {
       .filter(arr -> arr[0] * arr[0] + arr[1] * arr[1] == arr[2] * arr[2]))
     .findFirst();
 
-  if (triplet.isPresent()) {
-    IO.println(triplet.get()[0] + " " + triplet.get()[1] + " " + triplet.get()[2]);
-  }
+  triplet.ifPresent(ints -> IO.println(ints[0] + " " + ints[1] + " " + ints[2]));
 }
