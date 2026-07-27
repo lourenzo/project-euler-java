@@ -1,28 +1,34 @@
-void permute(String prefix, String digits, List<String> result) {
-  int n = digits.length();
-
-  // Base case: If there are no remaining digits, the prefix is a complete permutation.
-  if (n == 0) {
-    result.add(prefix);
+import java.util.ArrayList;
+import java.util.List;
+void permute(char[] chars, int index, List<String> result) {
+  if (index == chars.length - 1) {
+    result.add(new String(chars));
     return;
   }
+  for (int i = index; i < chars.length; i++) {
+    char temp = chars[i];
+    for (int j = i; j > index; j--) {
+      chars[j] = chars[j - 1];
+    }
+    chars[index] = temp;
 
-  // Recursive step: Try placing each remaining digit in the next position.
-  for (int i = 0; i < n; i++) {
-    // 1. Choose the current character
-    char current = digits.charAt(i);
+    permute(chars, index + 1, result);
 
-    // 2. Generate the remaining digits string (remove current char)
-    String newDigits = digits.substring(0, i) + digits.substring(i + 1);
-
-    // 3. Recurse with the new prefix and remaining digits
-    permute(prefix + current, newDigits, result);
+    temp = chars[index];
+    for (int j = index; j < i; j++) {
+      chars[j] = chars[j + 1];
+    }
+    chars[i] = temp;
   }
 }
 
 List<String> generatePermutations(String digits) {
   List<String> result = new ArrayList<>();
-  permute("", digits, result);
+  if (digits.isEmpty()) {
+    result.add("");
+    return result;
+  }
+  permute(digits.toCharArray(), 0, result);
   return result;
 }
 
