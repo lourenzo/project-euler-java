@@ -5,8 +5,15 @@ void main() {
     .mapToObj(x -> iterate(999, y -> y > 900, y -> y - 1)
       .map(y -> x * y)
       .distinct()
-      .filter((int number) -> String.valueOf(number)
-        .equals(new StringBuilder(String.valueOf(number)).reverse().toString()))
+      .filter((int number) -> {
+        int original = number;
+        int reversed = 0;
+        while (number > 0) {
+          reversed = reversed * 10 + number % 10;
+          number /= 10;
+        }
+        return original == reversed;
+      })
       .boxed())
     .flatMap(stream -> stream)
     .max(Integer::compareTo);
