@@ -44,7 +44,7 @@ void main() {
     .map(Map.Entry::getKey)
     .collect(Collectors.toList());
 
-  var abundantSumsSet = new HashSet<Long>();
+  boolean[] abundantSums = new boolean[(int) LIMIT + 1];
 
   for (int i = 0; i < abundantNumbers.size(); i++) {
     var a = abundantNumbers.get(i);
@@ -53,15 +53,14 @@ void main() {
       var sum = a + b;
 
       if (sum <= LIMIT) {
-        abundantSumsSet.add(sum);
-      } else {
+        abundantSums[(int) sum] = true;
       }
     }
   }
 
   long sumOfAllNonSumOfAbundant = 0L;
   for (long n = 1; n <= LIMIT; n++) {
-    if (!abundantSumsSet.contains(n)) {
+    if (!abundantSums[(int) n]) {
       sumOfAllNonSumOfAbundant += n;
     }
   }
